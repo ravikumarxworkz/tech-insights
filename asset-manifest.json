@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tech-insights/static/css/main.f1dbe883.css",
+    "main.js": "/tech-insights/static/js/main.a46209ba.js",
+    "index.html": "/tech-insights/index.html",
+    "main.f1dbe883.css.map": "/tech-insights/static/css/main.f1dbe883.css.map",
+    "main.a46209ba.js.map": "/tech-insights/static/js/main.a46209ba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f1dbe883.css",
+    "static/js/main.a46209ba.js"
+  ]
+}
