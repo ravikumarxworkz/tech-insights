@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // ⬆️ Keep BrowserRouter (don't change this)
 
 import TechHome from './pages/TechHome';
+import ProjectsPage from './pages/ProjectsPage';
 import TopicPage from './pages/TopicPage';
 import BlogPost from './pages/BlogPost';
 import Header from './components/Header';
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TechHome />} />
           <Route path="/topic/:id" element={<TopicPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
         <Footer />
