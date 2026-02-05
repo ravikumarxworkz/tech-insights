@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// ⬆️ Keep BrowserRouter (don't change this)
+
 import TechHome from './pages/TechHome';
 import TopicPage from './pages/TopicPage';
 import BlogPost from './pages/BlogPost';
@@ -11,7 +13,8 @@ import './styles/blog-post.css';
 
 function App() {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename="/tech-insights">
+      {/* ⬆️ CHANGE: Use explicit basename instead of process.env.PUBLIC_URL */}
       <div className="app-container">
         <Header />
         <Routes>
@@ -26,3 +29,10 @@ function App() {
 }
 
 export default App;
+
+/*
+CHANGES:
+1. Line 15: basename="/tech-insights" (explicit path)
+2. Make sure package.json has "homepage" set (see package.json file)
+3. Create 404.html file (next step)
+*/
