@@ -1,3 +1,53 @@
+import { allJavaConcepts } from './java/concepts/javaConcepts';
+import { allJavaInterviewQuestions } from './java/interviewQuestions/javaInterview';
+
+const javaConceptSections = allJavaConcepts.filter(Boolean);
+const javaConceptItems = javaConceptSections.flatMap(section =>
+  (section.pages || []).flatMap(page =>
+    (page.concepts || []).map(concept => ({
+      ...concept,
+      concept: concept.concept || section.conceptGroup
+    }))
+  )
+);
+
+const javaInterviewSections = allJavaInterviewQuestions.filter(Boolean);
+const javaInterviewItems = javaInterviewSections.flatMap(section =>
+  (section.pages || []).flatMap(page =>
+    (page.questions || []).map(question => ({
+      ...question,
+      concept: question.concept || section.conceptGroup
+    }))
+  )
+);
+
+const chunkItems = (items, size) => {
+  const pages = [];
+  for (let i = 0; i < items.length; i += size) {
+    pages.push(items.slice(i, i + size));
+  }
+  return pages;
+};
+
+const javaConceptPages = chunkItems(javaConceptItems, 10).map((concepts, index) => ({
+  pageNumber: index + 1,
+  concepts
+}));
+
+const javaInterviewPages = chunkItems(javaInterviewItems, 10).map((questions, index) => ({
+  pageNumber: index + 1,
+  questions
+}));
+
+const javaInterviewDifficulty = javaInterviewItems.reduce(
+  (acc, question) => {
+    if (question?.difficulty === 'easy') acc.easy += 1;
+    if (question?.difficulty === 'medium') acc.medium += 1;
+    if (question?.difficulty === 'hard') acc.hard += 1;
+    return acc;
+  },
+  { easy: 0, medium: 0, hard: 0 }
+);
 export const javaData = {
   title: "Java Mastery",
   subtitle: "Core concepts, OOPs, and Interview Questions",
@@ -142,5 +192,16 @@ public class Main {
       q: "What is the difference between ArrayList and LinkedList?",
       a: "ArrayList uses dynamic array (better for random access, O(1) retrieval). LinkedList uses doubly-linked list (better for insertion/deletion, O(1) at ends). ArrayList has faster iteration, LinkedList has faster insertion/deletion in middle."
     }
-  ]
+  ],
+  concepts: {
+        totalConcepts: javaConceptItems.length,
+        pages: javaConceptPages.length ? javaConceptPages : [{ pageNumber: 1, concepts: [] }]
+    },
+
+    // The Interview Bank section data
+    interviewQuestions: {
+        totalQuestions: javaInterviewItems.length,
+        difficulty: javaInterviewDifficulty,
+        pages: javaInterviewPages.length ? javaInterviewPages : [{ pageNumber: 1, questions: [] }]
+    }
 };
