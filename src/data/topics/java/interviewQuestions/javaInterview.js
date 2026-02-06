@@ -1,48 +1,106 @@
-import { encapsulationInterviewQuestions } from "./encapsulation";
-import { javaBasicsInterviewQuestions } from "./javaBasics";
-import { javaOopsInterviewQuestions } from "./javaOops";
-import { javaInheritanceInterviewQuestions } from "./inheritance";
-import { javaStaticInterviewQuestions } from "./javaStatic";
-import { javaOverridingQuestions } from "./javaOverriding";
+// ======================= IMPORTS =======================
+
+// 🟢 Core Java Basics
+import { javaIntroductionInterviewQuestions } from "./javaIntroduction";
+import { javaHistoryAndFeaturesInterviewQuestions } from "./javaHistoryAndFeatures";
+import { javaJvmJdkJreInterviewQuestions } from "./javaJvmJdkJre";
+import { javaCompilationExecutionInterviewQuestions } from "./javaCompilationExecution";
+import { javaKeywordsIdentifiersInterviewQuestions } from "./javaKeywordsIdentifiers";
+import { javaDataTypesInterviewQuestions } from "./javaDataTypes";
+import { javaVariablesConstantsInterviewQuestions } from "./javaVariablesConstants";
+import { javaTypesOfVariablesInterviewQuestions } from "./javaTypesOfVariables";
+import { javaStringsQuestions } from "./javaStrings";
+import { javaClassAndObjectsInterviewQuestions } from "./javaClassObjects";
+// 🟢 OOP Foundations
+ import { javaMethodsInterviewQuestions } from "./javaMethods";          // ❌ Methods (MISSING)
+ import { javaThisKeywordInterviewQuestions } from "./javaThisKeyword";  // ❌ this keyword (MISSING)
 import { javaOverloadingQuestions } from "./javaOverloading";
+import { javaInheritanceInterviewQuestions } from "./inheritance";
+import { javaOverridingQuestions } from "./javaOverriding";
+import { javaTypesOfInheritanceQuestions } from "./javaTypesOfInheritance"; // ❌ Types of Inheritance (MISSING)
 import { javaPolymorphismQuestions } from "./javaPolymorphism";
+import { javaMethodBindingInterviewQuestions } from "./javaMethodBinding";
 import { javaAbstractionQuestions } from "./javaAbstraction";
-import { javaInterfaceQuestions } from "./javaInterfaces";
-// import { javaCollectionsQuestions } from "./javaCollections";
-// import { javaMultithreadingQuestions } from "./javaMultithreading";
-// import { javaExceptionHandlingQuestions } from "./javaExceptionHandling";
-// import { javaGenericsQuestions } from "./javaGenerics";
-// import { javaLambdaExpressionsQuestions } from "./javaLambdaExpressions";
-// import { javaStreamsQuestions } from "./javaStreams";
-// import { javaMemoryManagementQuestions } from "./javaMemoryManagement";
-// import { javaJVMQuestions } from "./javaJVM";
-// import { javaDesignPatternsQuestions } from "./javaDesignPatterns";
-// import { javaConcurrencyQuestions } from "./javaConcurrency";
-// import { javaFunctionalProgrammingQuestions } from "./javaFunctionalProgramming";
-// import { javaBestPracticesQuestions } from "./javaBestPractices";
+import { javaPackagesAndInterfacesInterviewQuestions } from "./javaPackagesAndInterfaces";
+import { encapsulationInterviewQuestions } from "./encapsulation";
+
+// 🟢 Constructors & Memory
+import { javaConstructorsInterviewQuestions } from "./javaConstructors";
+import { javaStaticInterviewQuestions } from "./javaStatic";
+ import { javaFinalKeywordQuestions } from "./javaFinalKeyword";           // ❌ Final Keyword (MISSING)
+import { javaWrapperClassQuestions } from "./javaWrapperClasses";        // ❌ Wrapper Classes (MISSING)
+ import { javaClassLoadingQuestions } from "./javaClassLoading";          // ❌ Class Loading & toString() (MISSING)
+import { javaGarbageCollectionQuestions } from "./javaGarbageCollection";
+
+// 🟢 Advanced Core Java
+import { javaTypeCastingInterviewQuestions } from "./javaTypeCasting";
+import { javaPackagesInterviewQuestions } from "./javaPackages";         // ❌ Packages (MISSING)
+import { javaAccessModifiersInterviewQuestions } from "./javaAccessModifiers";
+import { javaExceptionHandlingInterviewQuestions } from "./javaExceptionHandling";
+
+// 🟢 Collections & I/O
+import { javaStreamsAndFileIOInterviewQuestions } from "./javaStreamsAndFileIO";
+import { javaCollectionsFrameworkInterviewQuestions } from "./javaCollectionsFramework";
+
+// 🟢 Multithreading
+import { javaMultithreadingInterviewQuestions } from "./javaMultithreading";
+
+// 🟢 Java 8+
+import { java8FeaturesInterviewQuestions } from "./java8Features";
+
+
+// ======================= FINAL ORDER =======================
 
 export const allJavaInterviewQuestions = [
-  javaBasicsInterviewQuestions, //page number 1
-  javaOopsInterviewQuestions, //page number 2
-  javaInheritanceInterviewQuestions, //page number 3
-  encapsulationInterviewQuestions, //page number 4
-  javaStaticInterviewQuestions, //page number 5
-  javaOverridingQuestions, //page number 6
-  javaOverloadingQuestions, //page number 7
-  javaPolymorphismQuestions, //page number 8
-  javaAbstractionQuestions, //page number 9
-  javaInterfaceQuestions, //page number 10
-  // javaCollectionsQuestions, //page number 11
-  // javaMultithreadingQuestions, //page number 12
-  // javaExceptionHandlingQuestions, //page number 13
-  // javaGenericsQuestions, //page number 14
-  // javaLambdaExpressionsQuestions, //page number 15
-  // javaStreamsQuestions, //page number 16
-  // javaMemoryManagementQuestions, //page number 17
-  // javaJVMQuestions, //page number 18
-  // javaDesignPatternsQuestions, //page number 19
-  // javaConcurrencyQuestions, //page number 20
-  // javaFunctionalProgrammingQuestions, //page number 21
-  // javaBestPracticesQuestions, //page number 22
 
+  // 🟢 Core Java Basics
+  javaIntroductionInterviewQuestions,
+  javaHistoryAndFeaturesInterviewQuestions,
+  javaJvmJdkJreInterviewQuestions,
+  javaCompilationExecutionInterviewQuestions,
+  javaKeywordsIdentifiersInterviewQuestions,
+  javaDataTypesInterviewQuestions,
+  javaVariablesConstantsInterviewQuestions,
+  javaTypesOfVariablesInterviewQuestions,
+  javaStringsQuestions,
+  javaClassAndObjectsInterviewQuestions,            // Introduction, History, JVM, Compilation, Keywords, Data Types, Variables
+  javaStringsQuestions,                      // Strings
+  javaClassAndObjectsInterviewQuestions,     // Class & Objects
+
+  // 🟢 OOP Foundations
+   javaMethodsInterviewQuestions,           // ❌ Methods
+  javaThisKeywordInterviewQuestions,       // ❌ this keyword
+  javaOverloadingQuestions,                  // Method Overloading
+  javaInheritanceInterviewQuestions,         // Inheritance
+  javaOverridingQuestions,                   // Method Overriding
+  // javaTypesOfInheritanceQuestions,         // ❌ Types of Inheritance
+  javaPolymorphismQuestions,                 // Polymorphism
+  javaMethodBindingInterviewQuestions,       // Method Binding
+  javaAbstractionQuestions,                  // Abstraction
+  javaPackagesAndInterfacesInterviewQuestions, // Interfaces
+  encapsulationInterviewQuestions,           // Encapsulation
+
+  // 🟢 Constructors & Memory
+  javaConstructorsInterviewQuestions,        // Constructors
+  javaStaticInterviewQuestions,              // Static Keyword
+   javaFinalKeywordQuestions,               // ❌ Final Keyword
+   javaWrapperClassQuestions,               // ❌ Wrapper Classes
+  javaClassLoadingQuestions,               // ❌ Class Loading & toString()
+  javaGarbageCollectionQuestions,            // Garbage Collection
+
+  // 🟢 Advanced Core Java
+  javaTypeCastingInterviewQuestions,         // Type Casting
+   javaPackagesInterviewQuestions,          // ❌ Packages
+  javaAccessModifiersInterviewQuestions,     // Access Modifiers
+  javaExceptionHandlingInterviewQuestions,   // Exception Handling
+
+  // 🟢 Collections & I/O
+  javaStreamsAndFileIOInterviewQuestions,    // Streams & File I/O
+  javaCollectionsFrameworkInterviewQuestions,// Java Collections Framework
+
+  // 🟢 Multithreading
+  javaMultithreadingInterviewQuestions,      // Multithreading & Concurrency
+
+  // 🟢 Java 8+
+  java8FeaturesInterviewQuestions            // Java 8 Features
 ];
