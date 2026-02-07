@@ -54,10 +54,10 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>&copy; 2026 Ravikumar Shankar Kumbar. All rights reserved.</p>
-          <p class="text-muted">
+          <p className="text-muted">
             Made with ❤️ by
             <a
-              class="link-primary"
+              className="link-primary"
               href="https://ravikumarxworkz.github.io/"
               target="_blank"
             >

@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { MockInterviewProvider } from './contexts/MockInterviewContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { mockInterviewRouteElements } from './routes/mockInterviewRoutes';
 // ⬆️ Keep BrowserRouter (don't change this)
 
 import TechHome from './pages/TechHome';
@@ -16,16 +19,21 @@ function App() {
   return (
     <Router basename="/tech-insights">
       {/* ⬆️ CHANGE: Use explicit basename instead of process.env.PUBLIC_URL */}
-      <div className="app-container">
-        <Header />
-        <Routes>
-          <Route path="/" element={<TechHome />} />
-          <Route path="/topic/:id" element={<TopicPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-        </Routes>
-        <Footer />
-      </div>
+      <AuthProvider>
+        <div className="app-container">
+          <Header />
+          <MockInterviewProvider>
+            <Routes>
+              <Route path="/" element={<TechHome />} />
+              <Route path="/topic/:id" element={<TopicPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              {mockInterviewRouteElements}
+            </Routes>
+          </MockInterviewProvider>
+          <Footer />
+        </div>
+      </AuthProvider>
     </Router>
   );
 }

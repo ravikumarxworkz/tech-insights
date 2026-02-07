@@ -1,0 +1,85 @@
+/**
+ * FIREBASE FIRESTORE SECURITY RULES
+ * Matches mockInterviewService.js structure exactly
+ */
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ========================
+    // USERS COLLECTION
+    // ========================
+    // Only authenticated users can read/write their own profile
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow create, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // ========================
+    // MOCK ATTEMPTS COLLECTION
+    // ========================
+    // Users can create attempts and read their own
+    match /mockAttempts/{docId} {
+      allow create: if request.auth != null 
+                    && request.resource.data.userId == request.auth.uid;
+      allow read: if request.auth != null 
+                  && request.auth.uid == resource.data.userId;
+    }
+
+    // ========================
+    // LEADERBOARDS COLLECTION
+    // ========================
+    // Public leaderboard reads, authenticated user writes to own entries
+    match /leaderboards/{docId} {
+      allow read: if true;
+      
+      match /entries/{userId} {
+        allow read: if true;
+        allow create, write: if request.auth != null 
+                             && request.auth.uid == userId;
+      }
+    }
+
+    // ========================
+    // DENY ALL BY DEFAULT
+    // ========================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+/**
+ * IMPORTANT: To make leaderboard updates secure:
+ * - Use Cloud Functions to update leaderboards
+ * - Never expose emails or personal data
+ * - Validate scores server-side
+ * 
+ * Example Cloud Function approach:
+ * 
+ * exports.updateLeaderboard = functions.firestore
+ *   .document('mockAttempts/{docId}')
+ *   .onCreate(async (snap) => {
+ *     const data = snap.data();
+ *     const userRef = admin.firestore().collection('users').doc(data.userId);
+ *     const user = await userRef.get();
+ *     
+ *     // Update leaderboard only with name and points (no email)
+ *     const leaderboardRef = admin.firestore()
+ *       .collection('leaderboards')
+ *       .doc(`${data.domain}_overall`)
+ *       .collection('entries')
+ *       .doc(data.userId);
+ *     
+ *     const existingEntry = await leaderboardRef.get();
+ *     const currentPoints = existingEntry.exists ? existingEntry.data().points : 0;
+ *     
+ *     await leaderboardRef.set({
+ *       userId: data.userId,
+ *       name: user.data().displayName,
+ *       points: currentPoints + data.points,
+ *       lastUpdated: admin.firestore.FieldValue.serverTimestamp()
+ *     }, { merge: true });
+ *   });
+ */

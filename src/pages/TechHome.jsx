@@ -5,20 +5,32 @@ import { getRecentBlogs } from '../data/blogs';
 import { FaJava, FaPython, FaReact, FaGithub, FaDatabase, FaCode } from 'react-icons/fa';
 import { SiDotnet } from 'react-icons/si';
 
+// Calculate total interview questions across all topics
+const getTotalInterviewQuestions = () => {
+  return Object.values(topicData).reduce((total, topic) => {
+    return total + (topic?.questions?.length || 0);
+  }, 0);
+};
+
 // Generate dynamic recent posts from actual topic data
 const generateRecentPosts = () => {
   const posts = [];
   
-  // Get first question from each topic
-  Object.entries(topicData).forEach(([key, topic]) => {
-    if (topic.questions && topic.questions.length > 0) {
+  // Define topic order for consistency
+  const topicOrder = ['java', 'python', 'dotnet', 'mysql', 'dsa', 'git'];
+  
+  // Get first question from each topic in defined order
+  topicOrder.forEach((key) => {
+    const topic = topicData[key];
+    if (topic?.questions && topic.questions.length > 0) {
       const firstQuestion = topic.questions[0];
       posts.push({
         id: key,
         title: firstQuestion.title,
         tag: topic.title.split(' ')[0], // Get first word as tag
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        link: `/topic/${key}`
+        link: `/topic/${key}`,
+        count: topic.questions.length // Show total count for each topic
       });
     }
   });
@@ -89,6 +101,7 @@ const topicCategories = [
 const TechHome = () => {
   const recentPosts = generateRecentPosts();
   const recentBlogs = getRecentBlogs(3);
+  const totalQuestions = getTotalInterviewQuestions();
 
   return (
     <main className="tech-home">
@@ -109,7 +122,7 @@ const TechHome = () => {
           </p>
           <div className="hero-stats">
             <div className="stat-item">
-              <span className="stat-number">100+</span>
+              <span className="stat-number">40+</span>
               <span className="stat-label">Code Examples</span>
             </div>
             <div className="stat-item">
@@ -117,7 +130,7 @@ const TechHome = () => {
               <span className="stat-label">Topics</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">50+</span>
+              <span className="stat-number">1000+</span>
               <span className="stat-label">Interview Q&A</span>
             </div>
           </div>
@@ -159,6 +172,47 @@ const TechHome = () => {
             </motion.div>
           ))}
         </div>
+      </section>
+
+      {/* 🎯 MOCK INTERVIEW CTA SECTION - HIGHLIGHTED */}
+      <section className="mock-interview-cta-section">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="mock-interview-banner"
+        >
+          <div className="cta-badge">🎯 NEW FEATURE</div>
+          <h2>Full-Length Mock Interviews</h2>
+          <p>Practice with realistic timed interviews, track your progress, and compete on leaderboards</p>
+          
+          <div className="cta-features">
+            <div className="feature">
+              <span className="feature-icon">⏱️</span>
+              <span>30-minute tests</span>
+            </div>
+            <div className="feature">
+              <span className="feature-icon">📊</span>
+              <span>15 questions per test</span>
+            </div>
+            <div className="feature">
+              <span className="feature-icon">🏆</span>
+              <span>Leaderboards & rankings</span>
+            </div>
+            <div className="feature">
+              <span className="feature-icon">📈</span>
+              <span>Track all attempts</span>
+            </div>
+          </div>
+
+          <div className="cta-buttons">
+            <Link to="/mock-interview" className="cta-btn cta-btn-primary">
+              🚀 Start Mock Interview
+            </Link>
+            <Link to="/leaderboard" className="cta-btn cta-btn-secondary">
+              🏅 View Leaderboard
+            </Link>
+          </div>
+        </motion.div>
       </section>
 
       {/* Main Content Grid */}
